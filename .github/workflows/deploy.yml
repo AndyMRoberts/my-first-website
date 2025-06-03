@@ -24,6 +24,13 @@ jobs:
       - name: Install dependencies
         run: |
           pip install mkdocs mkdocs-material
+          
+      - name: Set up git for deployment
+        run: |
+          git config --global user.email "blank@example.com"
+          git config --global user.name "GitHub Actions"
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/AndyMRoberts/my-first-website.git
+
 
       - name: Deploy to GitHub Pages
         run: |
