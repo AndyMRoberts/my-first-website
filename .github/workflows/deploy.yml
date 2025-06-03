@@ -1,5 +1,8 @@
 name: Deploy MkDocs site
 
+env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  
 on:
   push:
     branches:
