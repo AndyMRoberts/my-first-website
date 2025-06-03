@@ -3,11 +3,13 @@ name: Deploy MkDocs site
 on:
   push:
     branches:
-      - main 
+      - main # Or whatever your main branch is
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # <--- ADD THIS LINE to grant write permissions to the job
 
     steps:
       - name: Checkout code
@@ -24,13 +26,17 @@ jobs:
 
       - name: Build MkDocs site
         run: mkdocs build
-      
+
       - name: Deploy using ghp-import
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }} # Ensure this secret is correctly named in your repo settings
         run: |
           pip install ghp-import
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          ghp-import -n -p -f -r "https://x-access-token:${GH_TOKEN}@github.com/AndyMRoberts/my-first-website.git" site
-
+          
+          # Explicitly set the 'origin' remote URL to use your PAT
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/AndyMRoberts/my-first-website.git"
+          
+          # Now run ghp-import without the -r flag, as 'origin' is already configured
+          ghp-import -n -p -f site
