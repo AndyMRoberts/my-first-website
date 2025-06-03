@@ -22,7 +22,13 @@ jobs:
         run: |
           pip install mkdocs mkdocs-material
 
-      - name: Deploy to GitHub Pages
+      - name: Build MkDocs site
+        run: mkdocs build
+      
+      - name: Deploy using ghp-import
         run: |
-          mkdocs gh-deploy --force --remote-url https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/AndyMRoberts/my-first-website.git
+          pip install ghp-import
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          ghp-import -n -p -f -r "https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/AndyMRoberts/my-first-website.git" site
 
