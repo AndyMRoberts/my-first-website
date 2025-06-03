@@ -26,9 +26,11 @@ jobs:
         run: mkdocs build
       
       - name: Deploy using ghp-import
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           pip install ghp-import
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          ghp-import -n -p -f -r "https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/AndyMRoberts/my-first-website.git" site
+          ghp-import -n -p -f -r "https://x-access-token:${GH_TOKEN}@github.com/AndyMRoberts/my-first-website.git" site
 
