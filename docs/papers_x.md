@@ -1,5 +1,3 @@
-I have a paper:
-
 ### Embedded Computing for Environmental Sensing and Mapping in Agricultural Robots: A Power and Performance Analysis
 _June 2025_
 
@@ -35,5 +33,5 @@ optimised for real-time usage based on the parameters selection, enabling
 a more accurate and power-efficient SLAM for longer operation time in
 the field.
 
-Not sure if I can let you download it yet.
-
+Links:
+[IEEE](https://ieeexplore.ieee.org/document/11105118)
